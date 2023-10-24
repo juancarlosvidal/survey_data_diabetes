@@ -1,3 +1,10 @@
+""" Survey Data to diagnose and predict the risk of diabetes mellitus """
+
+# Authors: Juan C. Vidal <juan.vidal@usc.es>
+#          Marcos Matabuena <mmatabuena@hsph.harvard.edu>
+#
+# License: GNU General Public License, version 3 (or shortly GPL-3 license)
+
 import torch
 import torch.nn as nn
 
