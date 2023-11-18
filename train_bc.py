@@ -20,7 +20,32 @@ import logging
 
 def cv_loop_bc(data, splits, n_epochs, batch_size, learning_rate, weight_decay,
                patience=5, min_delta=0):
+    """
+    cv_loop_bc (Cross-Validation Loop for Binary Classification) is a function designed to perform K-Fold cross-validation for a binary classification task. 
+    It involves training a model on each fold, evaluating it on a validation set, and testing it on a separate test set. 
+    The function aims to identify the model with the best performance across folds and aggregate the test metrics.
 
+    :param data (dict): 
+        A dictionary containing features (x), labels (y), weights (w), and possibly other data elements.
+    :param splits (generator): 
+        A generator of train-test splits, typically from K-Fold cross-validation.
+    :param n_epochs (int): 
+        Number of epochs for training the model.
+    :param batch_size (int): 
+        Batch size used during model training.
+    :param learning_rate (float): 
+        Learning rate for the optimizer.
+    :param weight_decay (float): 
+        Weight decay parameter for regularization.
+    :param patience (int): 
+        Patience parameter for early stopping to prevent overfitting.
+    :param min_delta (float): 
+        Minimum change in validation loss required to qualify as an improvement.
+    :returns:model (model object): 
+        The best-performing model across all folds, as determined by the minimum loss on the validation set.
+    :returns:
+        mean_metrics (dict): A dictionary containing the mean of the test metrics across all folds. Computed by the classification_mean_metrics function.
+    """
     model = None
     min_loss = np.inf
     metrics_list = []
@@ -52,6 +77,35 @@ def cv_loop_bc(data, splits, n_epochs, batch_size, learning_rate, weight_decay,
 # def run_fold(train_dl, val_dl, test_dl, n_epochs, learning_rate, weight_decay, best_error):
 def run_fold(data, train_split, val_split, test_split, n_epochs, batch_size, learning_rate, weight_decay,
              patience=5, min_delta=0):
+    """
+    run_fold is a function designed to train, validate, and test a binary classification model on a single fold of data. 
+    This function is a core component of cross-validation processes and handles the complete lifecycle of model training, including data preprocessing, training loop, early stopping, and evaluation on test data.
+    
+    :param data (dict): 
+        A dictionary containing features (x), labels (y), and weights (w).
+    :param dtrain_split (array-like): 
+        Indices for training samples.
+    :param dval_split (array-like): 
+        Indices for validation samples.
+    :param dtest_split (array-like): 
+        Indices for test samples.
+    :param dn_epochs (int): 
+        Number of epochs for training the model.
+    :param dbatch_size (int): 
+        Batch size used during model training.
+    :param dlearning_rate (float): 
+        Learning rate for the optimizer.
+    :param dweight_decay (float): 
+        Weight decay parameter for regularization.
+    :param dpatience (int, optional): 
+        Patience parameter for early stopping. Default is 5.
+    :param dmin_delta (float, optional): 
+        Minimum change in validation loss required to qualify as an improvement. Default is 0.
+    :returns:
+        - model_t (model object): The best-performing model on the validation set.
+        - min_loss (float): The minimum loss achieved on the validation set.
+        - test_metrics (dict): A dictionary containing test metrics such as accuracy, precision, recall, F1 score, cross-entropy, and confusion matrix.
+    """
 
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 

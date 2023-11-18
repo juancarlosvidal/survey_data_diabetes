@@ -22,6 +22,42 @@ from utils import weighted_quantile
 def run_conformance_inference(data, n_folds, n_epochs, batch_size, learning_rate, weight_decay,
                               alpha, patience_classification=5, min_delta_classification=0,
                               patience_regression=5, min_delta_regression=0):
+    """
+    run_conformance_inference is a comprehensive function structured to work in multiple stages, each involving different subsets of data and distinct models, to compute predictions and assess conformal inference results.
+    The function splits the data into four subsets (set1, set2, set3, set4) for different stages of the process. 
+    It trains a classification model on set1 and generates predictions for set2. 
+    Then it trains a regression model on set2 with modified labels and generates predictions for set3.
+    The conformal inference assessment is performed with set3 and set4.
+    First, computing the conformity scores on set3.
+    Second, performing conformal inference on set4, assessing whether predicted quantiles fall within a certain range of the predictions.
+
+    :param data (dict): 
+        A dictionary containing features (x), labels (y), weights (w), and additional parameters (z).
+    :param n_folds (int): 
+        Number of folds for K-Fold cross-validation.
+    :param n_epochs (int): 
+        Number of epochs for training the models.
+    :param batch_size (int): 
+        Batch size used during model training.
+    :param learning_rate (float): 
+        Learning rate for the optimizer.
+    :param weight_decay (float): 
+        Weight decay parameter for regularization.
+    :param alpha (float): 
+        Quantile level used in conformal inference.
+    :param patience_classification (int): 
+        Patience parameter for early stopping in classification model training.
+    :param min_delta_classification (float): 
+        Minimum change in loss to qualify as an improvement in classification model training.
+    :param patience_regression (int): 
+        Patience parameter for early stopping in regression model training.
+    :param min_delta_regression (float): 
+        Minimum change in loss to qualify as an improvement in regression model training.
+    :returns: 
+        - ci_result (dict): A dictionary containing the results of the conformal inference process, including various lists such as sequences, conditions, quantiles, scores, class predictions, actual labels, and correctness indicators.
+        - metrics_ce (dict or similar structure): Metrics from the classification model training.
+        - correct_2 (float): A performance indicator from the conformal inference assessment. 
+    """
 
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 

@@ -20,7 +20,31 @@ import logging
 
 def cv_loop_rr(data, splits, n_epochs, batch_size, learning_rate, weight_decay,
                alpha=0.1, patience=5, min_delta=0):
+    """
+    cv_loop_rr (Cross-Validation Loop for Regression) is a function designed to perform K-Fold cross-validation for a regression task. It involves training a regression model on each fold, evaluating it on a validation set, and testing it on a separate test set. The function aims to identify the model with the best performance across folds and aggregate the test metrics.
 
+    :param data (dict): 
+        A dictionary containing features (x), labels (y), and possibly other data elements like weights.
+    :param splits (generator): 
+        A generator of train-test splits, typically from K-Fold cross-validation.
+    :param n_epochs (int): 
+        Number of epochs for training the model.
+    :param batch_size (int): 
+        Batch size used during model training.
+    :param learning_rate (float): 
+        Learning rate for the optimizer.
+    :param weight_decay (float): 
+        Weight decay parameter for regularization.
+    :param alpha (float, optional): 
+        Quantile level used in regression, relevant for quantile regression tasks. Default is 0.1.
+    :param patience (int, optional): 
+        Patience parameter for early stopping to prevent overfitting. Default is 5.
+    :param min_delta (float, optional): 
+        Minimum change in validation loss required to qualify as an improvement. Default is 0.
+    :returns:
+        - model (model object): The best-performing model across all folds, as determined by the minimum loss on the validation set.
+        - mean_metrics (dict): A dictionary containing the mean of the test metrics across all folds. Computed by the regression_mean_metrics function.
+    """
     model = None
     min_loss = np.inf
     metrics_list = []
@@ -52,7 +76,36 @@ def cv_loop_rr(data, splits, n_epochs, batch_size, learning_rate, weight_decay,
 
 def run_fold(data, train_split, val_split, test_split, n_epochs, batch_size, learning_rate, weight_decay,
              alpha=0.1, patience=5, min_delta=0):
+    """
+    run_fold is a function tailored for training, validating, and testing a regression model on a single fold of data. This function is essential in a cross-validation process, handling the entire lifecycle of model training, including data preprocessing, training loops, early stopping, and evaluation on test data.
 
+    :param data (dict): 
+        A dictionary containing features (x), labels (y), and weights (w).
+    :param train_split (array-like): 
+        Indices for training samples.
+    :param val_split (array-like): 
+        Indices for validation samples.
+    :param test_split (array-like):
+        Indices for test samples.
+    :param n_epochs (int): 
+        Number of epochs for training the model.
+    :param batch_size (int): 
+        Batch size used during model training.
+    :param learning_rate (float): 
+        Learning rate for the optimizer.
+    :param weight_decay (float):    
+        Weight decay parameter for regularization.
+    :param alpha (float, optional): 
+        Quantile level for the Pinball Loss, relevant in quantile regression. Default is 0.1.
+    :param patience (int, optional): 
+        Patience parameter for early stopping. Default is 5.
+    :param min_delta (float, optional): 
+        Minimum change in validation loss required to qualify as an improvement. Default is 0.
+    :returns:
+        - model_t (model object): The best-performing model on the validation set.
+        - min_loss (float): The minimum loss achieved on the validation set.
+        - test_metrics (dict): A dictionary containing test metrics such as mean absolute error (MAE), mean squared error (MSE), and R-squared (R2).
+    """
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     min_loss = np.inf

@@ -22,7 +22,26 @@ import logging
 logging.basicConfig(format='%(message)s', level=logging.INFO)
 logging.getLogger("matplotlib").setLevel(logging.WARNING)
 
+"""
+This Python script is designed to run conformal inference on a dataset using various combinations of variables and configurations. 
+The script processes input files from a specified directory, applies different variable combinations for conformal inference, and outputs the results to another directory. 
+The script is configured via command-line arguments, making it flexible for different datasets and settings.
 
+Command-Line Arguments:
+    -i, --input_dir: Directory for input files.
+    -o, --output_dir: Directory for output files.
+    -c, --combination: Selection of variable combination.
+    -f, --n_folds: Number of cross-validation folds.
+    -e, --n_epochs: Number of training epochs.
+    -b, --batch_size: Batch size for training.
+    -lr, --learning_rate: Learning rate for the optimizer.
+    -wd, --weight_decay: Weight decay for regularization.
+
+Usage:
+    To execute the script, the user needs to provide the necessary command-line arguments. 
+    It's designed to be run in a terminal or command-line interface where Python and the required libraries (numpy, pandas, torch, etc.) are installed.
+    
+"""
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Description of your program')
