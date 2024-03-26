@@ -3,7 +3,7 @@
 Complex survey designs are commonly employed in many medical cohorts. In such scenarios, developing case-specific predictive risk score models that reflect the unique characteristics of the study design is essential. This approach is key to minimizing potential selective biases in results. The objectives of this paper are: (i) To propose a general predictive framework for regression and classification using neural network (NN) modeling, which incorporates survey weights into the estimation process; (ii) To introduce an uncertainty quantification algorithm based on conformal prediction, tailored for data from complex survey designs, enabling precise uncertainty measures in model outputs; and (iii) To apply this method in developing robust risk score models to assess the risk of Diabetes Mellitus in the US. population, utilizing data from the NHANES 2011-2014 cohort. The theoretical properties of our estimators are designed to ensure minimal bias, thereby ensuring that our models yield reliable predictions and contribute novel scientific insights in diabetes research. While focused on diabetes, this NN predictive framework is sufficiently adaptable to create comprehensive clinical models for a diverse array of diseases across various medical cohorts. Additionally, the software underpinning these models and their applications is openly accessible on GitHub.
 
 ### Authors: 
-- Marcos Matabuena, Department of Biostatistics, Harvard T.H. Chan School of Public Health, Boston, MA.
-- Juan C. Vidal, CiTIUS (Centro Singular de Investigación en Tecnoloxías Intelixentes), Universidad de Santiago de Compostela, Spain.
-- Rahul Ghosal, Department of Epidemiology and Biostatistics, University of South Carolina
-- Jukka-Pekka Onnela, Department of Biostatistics, Harvard T.H. Chan School of Public Health, Boston, MA.
+- __Marcos Matabuena__, Department of Biostatistics, Harvard T.H. Chan School of Public Health, Boston, MA.
+- __Juan C. Vidal__, CiTIUS (Centro Singular de Investigación en Tecnoloxías Intelixentes), Universidad de Santiago de Compostela, Spain.
+- __Rahul Ghosal__, Department of Epidemiology and Biostatistics, University of South Carolina
+- __Jukka-Pekka Onnela__, Department of Biostatistics, Harvard T.H. Chan School of Public Health, Boston, MA.
