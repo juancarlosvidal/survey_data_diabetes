@@ -5,5 +5,5 @@ Complex survey designs are commonly employed in many medical cohorts. In such sc
 ### Authors: 
 - __Marcos Matabuena__, Department of Biostatistics, Harvard T.H. Chan School of Public Health, Boston, MA.
 - __Juan C. Vidal__, CiTIUS (Centro Singular de Investigación en Tecnoloxías Intelixentes), Universidad de Santiago de Compostela, Spain.
-- __Rahul Ghosal__, Department of Epidemiology and Biostatistics, University of South Carolina
+- __Rahul Ghosal__, Department of Epidemiology and Biostatistics, University of South Carolina.
 - __Jukka-Pekka Onnela__, Department of Biostatistics, Harvard T.H. Chan School of Public Health, Boston, MA.
